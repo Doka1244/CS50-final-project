@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+    Get
+{% block body %}
+<section class="container">
+    <h2 style="text-align: center; margin-top: 10px;">Get you a new journey</h2>
+
+    <!-- Cases created by the user -->
+    <div>
+        {% if allrows %}
+        <div class="row justify-content-center">
+
+            {% for row in allrows %}
+            {% if row.person_id != user %}
+
+            <div class="col-4">
+                <p class="row"><img src="{{ url_for('static', filename='images/users/' + row.filename) }}" alt="Image for {{ row.description }}" style="width:auto; height:300px;"></p>
+                <p class="row"><strong>Location:</strong>  {{ row.location }}</p>
+                <p class="row"><strong>Description:</strong>  {{ row.description }}</p>
+                <form action="/rec/{{ row.id_case }}" method="POST">
+                    <button type="submit" class="btn btn-primary" style="margin: 5px;">Get</button>
+                </form>
+                <hr>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% else %}
+            <p>No cases created by you.</p>
+        {% endif %}
+
+
+</section>
+
+{% endblock %}

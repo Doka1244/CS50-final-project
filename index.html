@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<section class="container text-center">
+    <h2 style="text-align: center; margin-top: 15px;">Your Give and Get items</h2>
+
+    <!-- Cases created by the user -->
+    <div>
+        <h3 style="text-align: center; margin-top: 15px; margin-bottom: 25px;">Your Created Cases</h3>
+        {% if selected_cases  %}
+        <div class="row justify-content-start">
+            {% for case in selected_cases  %}
+            <div class="col-4">
+                <p class="row"><img src="{{ url_for('static', filename='images/users/' + row.filename) }}" alt="Image for {{ row.description }}" style="width:auto; height:300px;"></p>
+                <p class="row"><strong>Location:</strong>  {{ row.location }}</p>
+                <p class="row"><strong>Description:</strong>  {{ row.description }}</p>
+                <hr>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+            <p>No cases created by you.</p>
+        {% endif %}
+    </div>
+
+    <!-- Cases get by the user -->
+    <div>
+        <h3 style="text-align: center; margin-top: 15px; margin-bottom: 25px;">Your Get Cases</h3>
+        {% if rowsSelected %}
+        <div class="row justify-content-start">
+            {% for row in rowsSelected %}
+            <div class="col-4">
+                <p class="row"><img src="{{ url_for('static', filename='images/users/' + row.filename) }}" alt="Image for {{ row.description }}" style="width:auto; height:300px;"></p>
+                <p class="row"><strong>Location:</strong> {{ row.location }}</p>
+                <p class="row"><strong>Description:</strong> {{ row.description }}</p>
+                <hr>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+            <p>No cases obtained by you.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
